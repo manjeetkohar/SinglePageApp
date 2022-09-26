@@ -11,12 +11,12 @@
  * @param {*} url
  * @param {*} callback
  */
-function LoadData(method,url,callback){
+function LoadData(method:string,url:string,callback:Function){
         let XHR = new XMLHttpRequest();
         XHR.open(method,url);
         XHR.send();
         XHR.addEventListener("readystagechange",function(){
-            if((XHR.status == 200) && (XHR.readystate == 4))
+            if((XHR.status == 200) && (XHR.readyState == 4))
             {
                 // console.log(XHR.responseText);
                 // let contactDataSource=JSON.parse(XHR.responseText);
