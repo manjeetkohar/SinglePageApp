@@ -3,8 +3,15 @@
 
 (function()
 {
-    
-    function LoadData(method,url,callback){
+/**
+ *Loads data Asyn. from a URL it calls the callback
+  function when the data loading is complete
+ *
+ * @param {*} method
+ * @param {*} url
+ * @param {*} callback
+ */
+function LoadData(method,url,callback){
         let XHR = new XMLHttpRequest();
         XHR.open(method,url);
         XHR.send();
@@ -19,15 +26,16 @@
         });
     }
     // 1st way of using function
-    function start()
+
+    function Start()
     {
         console.log("App Started")
-        LoadData("GET","./Data/contacts.json",function(XHR){
-            console.log(XHR);
+        $.getJSON("./Data/contacts.json",function(DataSource){
+            console.log(DataSource.CotactList[0]);
         });
     }
  
-    window.addEventListener("load",start);
+    window.addEventListener("load",Start);
 })();
 
 
