@@ -9,10 +9,19 @@
     function Start()
     {
         console.log("App Started")
+
+        let contactList;
         $.getJSON("./Data/contacts.json",function(DataSource){
-            console.log(DataSource.CotactList[0]);
+            //Get you data from the DataSource
+            contactList=DataSource.ContactList;
+
+            //load your data into objects
+            let contact=new Contact();
+            console.log(contact.toString());
         });
+
     }
+   
  
     window.addEventListener("load",Start);
 })();
