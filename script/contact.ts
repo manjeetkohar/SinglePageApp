@@ -4,7 +4,7 @@ class Contact
     //private instance members(fields)
     private fullName:string;
     private contactNumber :string;
-    private emailAdress :string;
+    private emailAddress :string;
 
     //public properties
     get FullName():string
@@ -24,13 +24,13 @@ class Contact
     {
         this.contactNumber = contactNumber;
     }
-    get EmailAdress():string
+    get EmailAddress():string
     {
-        return this.emailAdress;
+        return this.emailAddress;
     }
-    set EmailAdress(emailAdress: string)
+    set EmailAddress(emailAddress: string)
     {
-        this.emailAdress = emailAdress;
+        this.emailAddress = emailAddress;
     }
 
     //constructor
@@ -38,14 +38,14 @@ class Contact
      * Creates an instance of Contact.
      * @param {string} [fullName="unknown name added"]
      * @param {string} [contactNumber="no contact number added "]
-     * @param {string} [emailAdress="no email adress added"]
+     * @param {string} [emailAddress="no email adrdess added"]
      * @memberof Contact
      */
-    constructor(fullName :string="unknown name added", contactNumber :string="no contact number added ", emailAdress :string ="no email adress added")
+    constructor(fullName :string="unknown name added", contactNumber :string="no contact number added ", emailAddress :string ="no email address added")
     {
         this.FullName=fullName;
         this.ContactNumber=contactNumber;
-        this.EmailAdress=emailAdress;
+        this.EmailAddress=emailAddress;
     }
 
     //public methods
@@ -60,13 +60,15 @@ class Contact
         let tempOutputstring="";
         tempOutputstring+= `Full name : ${this.FullName}\n`;
         tempOutputstring+= `Contact Number : ${this.ContactNumber}\n`;
-        tempOutputstring+= `Email Adress : ${this.EmailAdress}\n`;
+        tempOutputstring+= `Email Address : ${this.EmailAddress}\n`;
         return tempOutputstring;
     }
 
     //private methods
 
 
-
+public toJSON():string{
+    return`{ "FullName": ${this.FullName}} ,"ContactNumber" : ${this.ContactNumber},"EmailAddress": ${this.EmailAddress}     `
+}
 
 }
