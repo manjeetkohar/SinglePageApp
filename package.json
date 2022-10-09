@@ -1,9 +1,9 @@
 {
   "name": "comp2112-week2",
   "version": "demo app week2",
-  "description": "demo app week2",
+  "description": "demo app week5",
   "main": "index.js",
-  "repository": "https://github.com/KoharAmit/client-tom.git",
+  "repository": "https://github.com/KoharAmit/tomWeek5.git",
   "author": "Amit Amit",
   "license": "MIT",
   "dependencies": {

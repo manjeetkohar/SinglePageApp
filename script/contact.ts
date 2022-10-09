@@ -1,74 +1,75 @@
-class Contact
-{
-
-    //private instance members(fields)
-    private fullName:string;
-    private contactNumber :string;
-    private emailAddress :string;
-
-    //public properties
-    get FullName():string
-    {
+class Contact {
+    // private instance members (fields)
+    fullName;
+    contactNumber;
+    emailAddress;
+    // public properties
+    get FullName() {
         return this.fullName;
     }
-    set FullName(name: string)
-    {
+    set FullName(name) {
         this.fullName = name;
     }
-
-    get ContactNumber():string
-    {
+    get ContactNumber() {
         return this.contactNumber;
     }
-    set ContactNumber(contactNumber: string)
-    {
+    set ContactNumber(contactNumber) {
         this.contactNumber = contactNumber;
     }
-    get EmailAddress():string
-    {
+    get EmailAddress() {
         return this.emailAddress;
     }
-    set EmailAddress(emailAddress: string)
-    {
+    set EmailAddress(emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    //constructor
+    // constructor
     /**
-     * Creates an instance of Contact.
-     * @param {string} [fullName="unknown name added"]
-     * @param {string} [contactNumber="no contact number added "]
-     * @param {string} [emailAddress="no email adrdess added"]
+     *Creates an instance of Contact.
+
+     * @param {string} [fullName="unknown name"]
+     * @param {string} [contactNumber="no contact number"]
+     * @param {string} [emailAddress="unknown email address"]
      * @memberof Contact
      */
-    constructor(fullName :string="unknown name added", contactNumber :string="no contact number added ", emailAddress :string ="no email address added")
-    {
-        this.FullName=fullName;
-        this.ContactNumber=contactNumber;
-        this.EmailAddress=emailAddress;
+    constructor(fullName = "unknown name", contactNumber = "no contact number", emailAddress = "unknown email address") {
+        this.FullName = fullName;
+        this.ContactNumber = contactNumber;
+        this.EmailAddress = emailAddress;
     }
-
-    //public methods
+    // public methods
     /**
-     *this method overrides the built in toString method for the Contact class
+     * This method overrides the built-in toString method for the Contact class
      *
-     * @return {*}  {string}
+     * @returns {string}
      * @memberof Contact
      */
-    public toString():string
-    {
-        let tempOutputstring="";
-        tempOutputstring+= `Full name : ${this.FullName}\n`;
-        tempOutputstring+= `Contact Number : ${this.ContactNumber}\n`;
-        tempOutputstring+= `Email Address : ${this.EmailAddress}\n`;
-        return tempOutputstring;
+    toString() {
+        let outputString = "";
+        outputString += `Full Name     : ${this.FullName}\n`;
+        outputString += `Contact Number: ${this.ContactNumber}\n`;
+        outputString += `Email Address : ${this.EmailAddress}\n`;
+        return outputString;
     }
-
-    //private methods
-
-
-public toJSON():string{
-    return`{ "FullName": ${this.FullName}} ,"ContactNumber" : ${this.ContactNumber},"EmailAddress": ${this.EmailAddress}     `
+    /**
+     * This method converts class Data Members to a comma-separated list compatible with JSON
+     *
+     * @returns {string}
+     * @memberof Contact
+     */
+    toJSON() {
+        return `${this.FullName},${this.ContactNumber},${this.EmailAddress}`;
+    }
+    /**
+     * This method reads data from a comma-separated list and assigns it to class Data Members
+     *
+     * @param {string} data
+     * @memberof Contact
+     */
+    fromJSON(data) {
+        let stringArray = data.split(",");
+        this.FullName = stringArray[0];
+        this.ContactNumber = stringArray[1];
+        this.EmailAddress = stringArray[2];
+    }
 }
-
-}
+//# sourceMappingURL=contact.js.map
