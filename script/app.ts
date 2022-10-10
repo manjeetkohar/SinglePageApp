@@ -1,22 +1,20 @@
 "use strict";
 
 
-(function()
-{
+(function () {
 
     /**
      *this method save the data to localstorage
      *
      * @param {any[]} contactList
      */
-    function SaveContactListData(contactList:any[]){
-        let count=0
-        for (const contact of contactList)
-            {
-                let newContact = new Contact(contact.FullName,contact.ContactNumber,contact.EmailAddress);
-                localStorage.setItem(count.toString(), newContact.toJSON());
-                count++;
-            
+    function SaveContactListData(contactList: any[]) {
+        let count = 0
+        for (const contact of contactList) {
+            let newContact = new Contact(contact.FullName, contact.ContactNumber, contact.EmailAddress);
+            localStorage.setItem(count.toString(), newContact.toJSON());
+            count++;
+
         }
 
     }
@@ -26,14 +24,12 @@
      *
      * @return {*}  {Contact[]}
      */
-    function LoadContactListData():Contact[]
-    {
+    function LoadContactListData(): Contact[] {
         // create an empty Contatc Arrya Container
-        let ContactArray=new Array<Contact>();
-        let keys = Object.keys(localStorage); 
-        for(let key of keys) 
-        { 
-            let newContact=new Contact();
+        let ContactArray = new Array<Contact>();
+        let keys = Object.keys(localStorage);
+        for (let key of keys) {
+            let newContact = new Contact();
             newContact.fromJSON(localStorage.getItem(key));
             ContactArray.push(newContact);
 
@@ -43,32 +39,58 @@
     }
     // 1st way of using function
 
-    function Start()
-    {
-        console.log("App Started")
+    function LoadHeader(): void {
+        $.get("./Views/components/header.html", function (html_data) {
+            // loading page using js
+            // document.getElementsByTagName("header")[0].innerHTML=html_data;
 
-        
-        $.getJSON("./Data/contacts.json",function(DataSource){
-            //Get you data from the DataSource
-            let contactList:any[]=DataSource.ContactList;
+            // loading page using jquery
+            $("header").html(html_data)
 
-            SaveContactListData(contactList);
 
-            let ContactArray=LoadContactListData();
-            
-            for (const contact of ContactArray) {
-                console.log(contact.toString());
-                
+            // $("#homePage").addClass("active");
+
+            switch (document.title) {
+                case "Home":
+                    $("#homePage").addClass("active");
+                    break;
+                case "About Us":
+                    $("#aboutPage").addClass("active");
+                    break;
+                case "Our Projects":
+                    $("#projectPage").addClass("active");
+                    break;
+                case "Our Services":
+                    $("#servicesPage").addClass("active");
+                    break;
+                case "Contact Us":
+                    $("#contactPage").addClass("active");
+                    break;
             }
 
 
+        })
+    }
+    function LoadFooter(): void {
+        $.get("./Views/components/footer.html", function (html_data) {
+            // loading page using js
+            // document.getElementsByTagName("footer")[0].innerHTML=html_data;
 
-        });
+            // loading page using jquery
+            $("footer").html(html_data)
+        })
+    }
+    function Start() {
+        console.log("App Started")
+
+        LoadHeader();
+        LoadFooter();
+
 
     }
-   
- 
-    window.addEventListener("load",Start);
+
+
+    window.addEventListener("load", Start);
 })();
 
 
