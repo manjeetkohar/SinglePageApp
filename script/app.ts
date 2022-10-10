@@ -40,24 +40,43 @@
     // 1st way of using function
 
 
-
-    function LoadHeader(): void {
+/**
+ *this method load the header content
+ *
+ */
+function LoadHeader(): void {
         $.get("./Views/components/header.html", function (html_data) {
             // loading page using js
             // document.getElementsByTagName("header")[0].innerHTML=html_data;
 
             // loading page using jquery
             $("header").html(html_data);
+            // activate the home link on innitial load
+            $("li>a#Home").addClass("active");
 
-            $("li>a").on("click", function () {
-                let title=$(this).prop("id") as string;
-                // capitalizing title
-                document.title=title.substring(0,1).toUpperCase()+ title.substring(1);
+
+            $("li>a").on("click", function (event) {
+                event.preventDefault();
+                // this section is for changing title
+                document.title = $(this).prop("id") as string;
+
+
+                // this section is for changing URL
+                history.pushState({}, "", "/" + document.title);
+
+                // reset all links
+                $("li>a").each(function () {
+                    $(this).removeClass("active")
+                });
+
+
+                // activate the current link
+                $("li>a#" + document.title).addClass("active");
                 LoadContent();
-                
+
             });
 
-          
+
 
 
 
@@ -85,29 +104,27 @@
         });
     }
 
+    /**
+ *this method load the main content
+ *
+ */
+
     function LoadContent(): void {
+        let contentLink=document.title.toLowerCase()
 
+        $.get("./Views/content/home.html" +contentLink +".html" , function (html_data) 
+        { 
+            $("main").html(html_data);
+        });
 
-        switch (document.title) {
-            case "Home":
-                $.get("./Views/content/home.html", function (html_data) { $("main").html(html_data); });
-                break;
-            case "About":
-                $.get("./Views/content/about.html", function (html_data) { $("main").html(html_data); });
-                break;
-            case "Project":
-                $.get("./Views/content/project.html", function (html_data) { $("main").html(html_data); });
-                break;
-            case "Services":
-                $.get("./Views/content/services.html", function (html_data) { $("main").html(html_data); });
-                break;
-            case "Contact":
-                $.get("./Views/content/contact.html", function (html_data) { $("main").html(html_data); });
-                break;
-        }
 
 
     }
+
+    /**
+ *this method load the footer content
+ *
+ */
     function LoadFooter(): void {
         $.get("./Views/components/footer.html", function (html_data) {
             // loading page using js
@@ -119,8 +136,10 @@
     }
     function Start() {
         console.log("App Started")
-// initial load
-        document.title='Home';
+        // initial load
+        document.title = 'Home';
+        // this section is for changing URL
+        history.pushState({}, "", "/Home");
         LoadContent();
 
         LoadHeader();
