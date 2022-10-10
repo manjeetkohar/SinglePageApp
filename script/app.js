@@ -37,6 +37,7 @@
      *
      */
     function LoadHeader() {
+        console.log("loading Header");
         $.get("./Views/components/header.html", function (html_data) {
             // loading page using js
             // document.getElementsByTagName("header")[0].innerHTML=html_data;
@@ -83,6 +84,7 @@
  *
  */
     function LoadContent() {
+        console.log("loading Content");
         var contentLink = document.title.toLowerCase();
         $.get("./Views/content/home.html" + contentLink + ".html", function (html_data) {
             $("main").html(html_data);
@@ -93,6 +95,7 @@
  *
  */
     function LoadFooter() {
+        console.log("loading Footer");
         $.get("./Views/components/footer.html", function (html_data) {
             // loading page using js
             // document.getElementsByTagName("footer")[0].innerHTML=html_data;
