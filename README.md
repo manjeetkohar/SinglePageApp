@@ -1,3 +1,1 @@
-# SinglePageApplication
-# SinglePageApp
 # SinglePageApp
