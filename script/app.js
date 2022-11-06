@@ -86,7 +86,7 @@
     function LoadContent() {
         console.log("loading Content");
         var contentLink = document.title.toLowerCase();
-        $.get("./Views/content/home.html" + contentLink + ".html", function (html_data) {
+        $.get("./Views/content/" + contentLink + ".html", function (html_data) {
             $("main").html(html_data);
         });
     }
@@ -115,4 +115,3 @@
     }
     window.addEventListener("load", Start);
 })();
-//# sourceMappingURL=app.js.map
